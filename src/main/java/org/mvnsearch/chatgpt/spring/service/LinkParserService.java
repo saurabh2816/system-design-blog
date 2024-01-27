@@ -21,26 +21,38 @@ public class LinkParserService {
         this.chatGPTService = chatGPTService;
     }
 
-    public Mono<String> parseLinks(String content, int times) {
+    public Mono<String> parseLinks(String content) {
         String[] linksToParse = new String[]{"https://www.linkedin.com/pulse/go-concurrency-series-introduction-goroutines-pratik-pandey-rjcme/", "https://netflixtechblog.com/all-of-netflixs-hdr-video-streaming-is-now-dynamically-optimized-e9e0cb15f2ba", "https://netflixtechblog.com/rebuilding-netflix-video-processing-pipeline-with-microservices-4e5e6310e359"};
 
-        if(times <= 0) {
-            return Mono.empty();
-        }
-        else {
-            log.info("Parsing URL: " + linksToParse[times-1]);
-            log.info("Start: " + LocalDateTime.now());
+        log.info("Parsing URL: " + linksToParse[0]);
+        log.info("Start: " + LocalDateTime.now());
 
-            String newcontent = content.concat(linksToParse[times-1]);
-            return chatGPTService.chat(ChatCompletionRequest.of(newcontent))
-                    .map(ChatCompletionResponse::getReplyText)
-                    .doOnNext((r -> {
-                        System.out.println("response: " + r);
-                        log.info("End: " + LocalDateTime.now() + "\n\n\n");
-                    }))
-                    .delayElement(Duration.ofSeconds(20))
-                    .then(parseLinks(content, times - 1));
+        String newcontent = content.concat(linksToParse[0]);
+        var response =  chatGPTService.chat(ChatCompletionRequest.of(newcontent))
+                .map(ChatCompletionResponse::getReplyText);
 
-        }
+        response.subscribe(
+            item -> {
+                // Success handler: process the item
+                System.out.println("Received: " + item);
+            },
+            error -> {
+                // Error handler: process the error
+                System.err.println("Error occurred: " + error.getMessage());
+            },
+            () -> {
+                // Completion handler: called when the Mono completes
+                System.out.println("Completed");
+        });
+
+
+        return Mono.empty();
+
+//                .doOnNext((r -> {
+//                    System.out.println("response: " + r);
+//                    log.info("End: " + LocalDateTime.now() + "\n\n\n");
+//                }))
+//                .delayElement(Duration.ofSeconds(20));
     }
 }
+

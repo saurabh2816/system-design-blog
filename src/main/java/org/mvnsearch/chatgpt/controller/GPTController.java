@@ -40,6 +40,6 @@ public class GPTController {
 
     @PostMapping("/parseLinks")
     public Mono<String> parseLinks(@RequestBody String content) {
-        return linkParserService.parseLinks(content, 3);
+        return linkParserService.parseLinks(content);
     }
 }
