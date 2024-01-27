@@ -1,5 +1,6 @@
 package org.mvnsearch.chatgpt.spring.service;
 
+import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.PropertyKey;
 import org.mvnsearch.chatgpt.model.completion.chat.*;
 import org.mvnsearch.chatgpt.model.completion.completion.CompletionRequest;
@@ -16,6 +17,7 @@ import java.util.function.Function;
 
 import static org.mvnsearch.chatgpt.spring.service.PromptManager.PROMPTS_FQN;
 
+@Slf4j
 class ChatGPTServiceImpl implements ChatGPTService {
 
 	private final OpenAIChatAPI openAIChatAPI;

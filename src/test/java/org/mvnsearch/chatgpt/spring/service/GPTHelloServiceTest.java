@@ -2,7 +2,7 @@ package org.mvnsearch.chatgpt.spring.service;
 
 import org.junit.jupiter.api.Test;
 import org.mvnsearch.chatgpt.demo.ProjectBootBaseTest;
-import org.mvnsearch.chatgpt.demo.service.GPTHelloService;
+import org.mvnsearch.chatgpt.service.GPTHelloService;
 import org.springframework.beans.factory.annotation.Autowired;
 import reactor.test.StepVerifier;
 

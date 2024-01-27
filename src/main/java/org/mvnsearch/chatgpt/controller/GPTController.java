@@ -1,13 +1,12 @@
 package org.mvnsearch.chatgpt.controller;
 
 
-import org.mvnsearch.chatgpt.GPTService.GPTService;
+import lombok.extern.slf4j.Slf4j;
 import org.mvnsearch.chatgpt.model.completion.chat.ChatCompletionRequest;
 import org.mvnsearch.chatgpt.model.completion.chat.ChatCompletionResponse;
-import org.mvnsearch.chatgpt.spring.client.ChatGPTServiceProxyFactory;
 import org.mvnsearch.chatgpt.spring.service.ChatGPTService;
+import org.mvnsearch.chatgpt.spring.service.LinkParserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -17,6 +16,9 @@ import reactor.core.publisher.Mono;
 public class GPTController {
     @Autowired
     private ChatGPTService chatGPTService;
+
+    @Autowired
+    private LinkParserService  linkParserService;
 
     @GetMapping("/chat1")
     public String chat1() {
@@ -33,5 +35,11 @@ public class GPTController {
     public Flux<String> streamChat(@RequestParam String content) {
         return chatGPTService.stream(ChatCompletionRequest.of(content))
                 .map(ChatCompletionResponse::getReplyText);
+    }
+
+
+    @PostMapping("/parseLinks")
+    public Mono<String> parseLinks(@RequestBody String content) {
+        return linkParserService.parseLinks(content, 3);
     }
 }

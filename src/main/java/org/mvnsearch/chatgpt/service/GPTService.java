@@ -1,11 +1,9 @@
-package org.mvnsearch.chatgpt.GPTService;
+package org.mvnsearch.chatgpt.service;
 
 
 import org.mvnsearch.chatgpt.model.ChatCompletion;
 import org.mvnsearch.chatgpt.model.Completion;
 import org.mvnsearch.chatgpt.model.GPTExchange;
-import org.mvnsearch.chatgpt.spring.client.ChatGPTServiceProxyFactory;
-import org.springframework.context.annotation.Bean;
 import reactor.core.publisher.Mono;
 
 @GPTExchange

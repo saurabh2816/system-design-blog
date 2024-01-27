@@ -1,6 +1,6 @@
-package org.mvnsearch.chatgpt.demo;
+package org.mvnsearch.chatgpt;
 
-import org.mvnsearch.chatgpt.demo.service.GPTHelloService;
+import org.mvnsearch.chatgpt.service.GPTHelloService;
 import org.mvnsearch.chatgpt.spring.client.ChatGPTServiceProxyFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

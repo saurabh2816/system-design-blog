@@ -1,4 +1,4 @@
-package org.mvnsearch.chatgpt.demo.service;
+package org.mvnsearch.chatgpt.service;
 
 import org.mvnsearch.chatgpt.model.ChatCompletion;
 import org.mvnsearch.chatgpt.model.Completion;
