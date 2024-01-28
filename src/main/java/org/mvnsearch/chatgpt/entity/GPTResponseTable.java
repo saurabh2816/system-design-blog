@@ -24,7 +24,6 @@ public class GPTResponseTable {
     @Column(name = "link")
     private String link;
 
-    @Column(name = "created_at")
     @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime createdAt;
 
